@@ -4,3 +4,5 @@ sources:
       tables:
         - name: parcel
           identifier: raw_cc_parcel
+        - name: parcel_product
+          identifier: raw_cc_parcel_product

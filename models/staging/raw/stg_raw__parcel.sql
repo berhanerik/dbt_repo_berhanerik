@@ -12,11 +12,13 @@ renamed as (
         parcel_id,
         parcel_tracking,
         transporter,
-        priority,
-        PARSE_DATE('%b %e, %Y', date_purchase),
-        PARSE_DATE('%b %e, %Y', date_shipping),
-        PARSE_DATE('%b %e, %Y', date_delivery),
-        PARSE_DATE('%b %e, %Y', datecancelled)
+        CASE WHEN priority = 'High' THEN '1-High'
+             WHEN priority = 'Medium' THEN '2-Medium'
+             WHEN priority = 'Low' THEN '3-Low' ELSE '0' END AS priority,
+        PARSE_DATE('%B %e, %Y', date_purchase),
+        PARSE_DATE('%B %e, %Y', date_shipping),
+        PARSE_DATE('%B %e, %Y', date_delivery),
+        PARSE_DATE('%B %e, %Y', datecancelled)
 
     from source
 
