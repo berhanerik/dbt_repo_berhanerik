@@ -1,0 +1,6 @@
+sources:
+    - name: raw
+      schema: parcel_raw_data
+      tables:
+        - name: parcel
+          identifier: raw_cc_parcel
