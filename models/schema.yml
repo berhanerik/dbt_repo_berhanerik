@@ -4,15 +4,13 @@ version: 2
 sources:
     - name: raw
       schema: gz_raw_data
-
       tables:
         - name: sales
           identifier: raw_gz_sales
           description: sales of Greenweez / we have one row per product_id found in each orders_id
-          # Freshness testing
           loaded_at_field: "CAST(date_date AS TIMESTAMP)"
           freshness:
-            warn_after: {count: 90, period: day}
+              warn_after: {count: 90, period: day}
           columns:
             - name: date_date
               description: date of purchase
@@ -50,3 +48,36 @@ sources:
               description: the cost of preparing the parcel in the distribution centre/warehouse
             - name: ship_cost
               description: shipping cost paid by Greenweez to the carrier/logistics provider
+        - name: adwords
+          identifier: raw_gz_adwords
+          description: campaign data for Greenweez orders in adwords
+        - name: bing
+          identifier: raw_gz_bing
+          description: campaign data for Greenweez orders in bing
+        - name: criteo
+          identifier: raw_gz_criteo
+          description: campaign data for Greenweez orders in criteo
+        - name: facebook
+          identifier: raw_gz_facebook
+          description: campaign data for Greenweez orders in facebook
+models:
+    - name: int_campaigns
+      description: tüm kampanyalardan gelen veriler
+      columns:
+        - name: paid_source
+          tests:
+            - not_null
+        - name: campaign_name
+          tests:
+            - not_null
+    - name: finance_campaigns_day
+      description: global kpi
+      columns:
+        - name: ads_margin
+          description: operational_margin - ads_cost
+          tests:
+            - not_null
+        - name: average_basket
+          description: her gün için ortalama sepet tutarı
+          tests:
+            - not_null
