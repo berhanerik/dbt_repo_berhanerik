@@ -7,14 +7,11 @@ source as (
 ),
 
 renamed as (
-
-    select
-        parcel_id,
-        model_mame,
-        quantity
-
-    from source
-
+    
+select
+ParCEL_id AS parcel_id,
+Model_mAME AS model_name,
+QUANTITY AS qty
 )
 
 select * from renamed
